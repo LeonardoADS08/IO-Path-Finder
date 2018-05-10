@@ -25,6 +25,13 @@ namespace MapasWF
         {
             InitializeComponent();
             manager = new MapFormManager(Map1);
+            Map1.OnMapDrag += Map1_OnMapDrag;
+        }
+
+        private void Map1_OnMapDrag()
+        {
+            Tlatitud.Text = Map1.Position.Lat.ToString();
+            Tlongitud.Text = Map1.Position.Lng.ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -105,6 +112,11 @@ namespace MapasWF
         private void button5_Click(object sender, EventArgs e)
         {
             manager.Fflush(Map1);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
