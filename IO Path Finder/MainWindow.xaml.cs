@@ -25,7 +25,6 @@ namespace IO_Path_Finder
         public MainWindow()
         {
             InitializeComponent();
-            GoogleSigned.AssignAllServices(new GoogleSigned("AIzaSyCtcn_dJ3F-DfVCKyaO1-lTBIkoIbyZZYo"));
 
             Grafo.Grafo G = new Grafo.Grafo();
             G.Insertar("Universidad Privada de Santa Cruz de la Sierra, Bolivia");

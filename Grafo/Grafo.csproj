@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Arista.cs" />
     <Compile Include="Constantes.cs" />
+    <Compile Include="Coordenada.cs" />
     <Compile Include="Estados.cs" />
     <Compile Include="Grafo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
