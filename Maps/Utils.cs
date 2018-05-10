@@ -14,7 +14,7 @@ namespace Maps
 
         static Utils()
         {
-            //GoogleSigned.AssignAllServices(new GoogleSigned("AIzaSyDwxtnuTp4DsThoy3GM59KmR7mATsR4PWY"));
+            GoogleSigned.AssignAllServices(new GoogleSigned("AIzaSyCtcn_dJ3F-DfVCKyaO1-lTBIkoIbyZZYo"));
         }
 
         public static void GeolocalizarGrafo(Grafo.Grafo G)
