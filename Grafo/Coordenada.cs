@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Grafo
 {
-    class Coordenada
+    public class Coordenada
     {
-        double Latitud;
-        double Longitud;
+        public double Latitud;
+        public double Longitud;
 
         public Coordenada()
         {

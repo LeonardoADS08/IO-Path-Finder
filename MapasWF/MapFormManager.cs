@@ -8,6 +8,7 @@ using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
+using Grafo;
 namespace MapasWF
 {
     class MapFormManager
@@ -32,12 +33,12 @@ namespace MapasWF
         /// <summary>
         /// marca la posicion (siempre sera verde)
         /// </summary>
-        /// <param name="x">puedes usar new PointLatLng( latitud , longitud )</param>
+        /// <param name="x">puedes usar new PointLatLng( latitud , longitud )</param> pero crea una diferente overlay
         public void AddMarkernShow(PointLatLng x)
         {
   
             _marker = new GMarkerGoogle(x, GMarkerGoogleType.red_small);
-            _marker.ToolTipText=("Lat=" + x.Lat + "\n Long=" + x.Lng);
+            _marker.ToolTipText=("Lat=" + Math.Round(x.Lat, 3) + "\n Long=" + Math.Round(x.Lng, 3));
             _marker.ToolTipMode = MarkerTooltipMode.Always;
 
             _overlay.Markers.Add(_marker);
@@ -127,6 +128,47 @@ namespace MapasWF
 
            
         }
+
+        private GMapOverlay CoordinateArrayToOverlay(List<Coordenada> x)
+        {
+            GMarkerGoogle current = null;
+            GMapOverlay aux= new GMapOverlay("Marcadores");
+            foreach (Coordenada u in x)
+            {
+                
+                current = new GMarkerGoogle(new PointLatLng(u.Latitud, u.Longitud),GMarkerGoogleType.blue_pushpin);
+                current.ToolTipText= "Lat="+ Math.Round(u.Latitud, 4)+"\n Long"+ Math.Round(u.Longitud, 4);
+                aux.Markers.Add(current);
+            }
+
+            return aux;
+        }
+
+        /// <summary>
+        /// Muesra en el mapa(del form) una collecion de coordenadas como una ruta
+        /// </summary>
+        /// <param name="x"></param>
+        private void ShowMapMarkerCollection(List<Coordenada> x)
+        {
+            if (x.Count <= 1)
+            {
+                MessageBox.Show("No existen sifuciente Nodos para realizar un camino");
+                return;
+            }
+            else
+            {
+                PointLatLng prim, sec;
+                for (int i = 0; i < x.Count() - 1; i++)
+                {
+                    prim = new PointLatLng(x[i].Latitud, x[i].Longitud);
+                    sec = new PointLatLng(x[i + 1].Latitud, x[i + 1].Longitud);
+                    CrearRutadinamica(prim, sec);
+
+                }
+            }
+
+        }
+
 
 
     }
