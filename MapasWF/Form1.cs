@@ -26,6 +26,12 @@ namespace MapasWF
             InitializeComponent();
             manager = new MapFormManager(Map1);
             Map1.OnMapDrag += Map1_OnMapDrag;
+            Map1.OnMarkerClick += Map1_OnMarkerClick;
+        }
+
+        private void Map1_OnMarkerClick(GMapMarker item, MouseEventArgs e)
+        {
+            item.ToolTipMode = item.ToolTipMode == MarkerTooltipMode.Always ? MarkerTooltipMode.Never : MarkerTooltipMode.Always;
         }
 
         private void Map1_OnMapDrag()

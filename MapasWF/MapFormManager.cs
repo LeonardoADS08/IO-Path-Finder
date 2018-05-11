@@ -62,10 +62,10 @@ namespace MapasWF
             _main.DragButton = MouseButtons.Left;
             _main.CanDragMap = true;
             _main.MapProvider = GMapProviders.GoogleMap;
-            _main.Position = new PointLatLng(-17, -65);
+            _main.Position = new PointLatLng(-17.782788, -63.182387);
             _main.MinZoom = 0;
             _main.MaxZoom = 340;
-            _main.Zoom = 10;
+            _main.Zoom = 14;
             _main.AutoScroll = true;
             _overlay = new GMapOverlay("Camino Optimo");
         }
@@ -116,6 +116,7 @@ namespace MapasWF
                 while (_main.Overlays.Count != 0)
                 {
                     _main.Overlays.RemoveAt(0);
+                    _overlay = new GMapOverlay("Marcadores");
                     this.Update();
                 }
             }
