@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maps", "Maps\Maps.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grafo", "Grafo\Grafo.csproj", "{787DB607-9372-4B41-B4A4-A5E78479A3CB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "DB\Utils.csproj", "{A72C6DE5-5C13-40E2-93BD-614A9C7EF42F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{787DB607-9372-4B41-B4A4-A5E78479A3CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{787DB607-9372-4B41-B4A4-A5E78479A3CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{787DB607-9372-4B41-B4A4-A5E78479A3CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A72C6DE5-5C13-40E2-93BD-614A9C7EF42F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A72C6DE5-5C13-40E2-93BD-614A9C7EF42F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A72C6DE5-5C13-40E2-93BD-614A9C7EF42F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A72C6DE5-5C13-40E2-93BD-614A9C7EF42F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

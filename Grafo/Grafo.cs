@@ -65,5 +65,15 @@ namespace Grafo
 
             return false;
         }
+
+        public List<Coordenada> Coordenadas()
+        {
+            List<Coordenada> res = new List<Coordenada>();
+            foreach(var val in Vertices)
+            {
+                res.Add(new Coordenada(val.Latitud, val.Longitud));
+            }
+            return res;
+        }
     }
 }

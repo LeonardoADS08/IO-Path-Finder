@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Grafo
 {
-    class Coordenada
+    public class Coordenada
     {
         double Latitud;
         double Longitud;
