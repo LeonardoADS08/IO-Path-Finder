@@ -27,6 +27,11 @@ namespace Grafo
             Longitud = longitud;
         }
 
+        public VerticeDB(string nombre)
+        {
+            Nombre = nombre;
+        }
+
         public static List<Vertice> ConsultarVertices()
         {
             List<Vertice> res = new List<Vertice>();
@@ -38,5 +43,6 @@ namespace Grafo
             }
             return res;
         }
+
     }
 }

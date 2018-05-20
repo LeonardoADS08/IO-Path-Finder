@@ -14,7 +14,13 @@ namespace Grafo.Utils
             try
             {
                 List<VerticeDB> datos = new List<VerticeDB>();
-                // datos.Add(new VerticeDB("NOMBRE", -11.1111, -11.11111));
+                datos.Add(new VerticeDB("Universidad Privada de Santa Cruz de la Sierra, Bolivia"));
+                datos.Add(new VerticeDB("Estadio Tahuichi Aguilera"));
+                datos.Add(new VerticeDB("Avion Pirata"));
+                datos.Add(new VerticeDB("Plaza 24 de Septiembre"));
+                datos.Add(new VerticeDB("Ventura Mall, Santa Cruz de la Sierra, Bolivia"));
+                datos.Add(new VerticeDB("Universidad Gabriel Rene Moreno, Santa Cruz de la Sierra, Bolivia"));
+                datos.Add(new VerticeDB("Aeropuerto el trompillo"));
 
 
                 VerticeDB.Eliminar();

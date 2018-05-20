@@ -67,5 +67,13 @@ namespace Maps
                 }
             }
         }
+
+        public Grafo.Grafo SolicitarDatos()
+        {
+            Grafo.Grafo res = new Grafo.Grafo();
+            res.CargarGrafo();
+            GeolocalizarGrafo(res);
+            return res;
+        }
     }
 }
