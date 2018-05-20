@@ -73,14 +73,17 @@ namespace Maps
             }
         }
 
-        public static Grafo.Grafo SolicitarDatos()
+        public static Grafo.Grafo SolicitarDatos(bool calcularDistancias = false)
         {
             Grafo.Grafo res = new Grafo.Grafo();
             res.CargarGrafo();
             GeolocalizarGrafo(res);
-            foreach(var val in res.Vertices)
+            if (calcularDistancias)
             {
-                Calcular(val);
+                foreach (var val in res.Vertices)
+                {
+                    Calcular(val);
+                }
             }
             return res;
         }
