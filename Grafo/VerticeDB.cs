@@ -27,5 +27,16 @@ namespace Grafo
             Longitud = longitud;
         }
 
+        public static List<Vertice> ConsultarVertices()
+        {
+            List<Vertice> res = new List<Vertice>();
+            var valores = Consulta();
+
+            foreach(var val in valores)
+            {
+                res.Add(new Vertice(val));
+            }
+            return res;
+        }
     }
 }

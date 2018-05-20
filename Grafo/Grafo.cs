@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,6 +75,21 @@ namespace Grafo
                 res.Add(new Coordenada(val.Latitud, val.Longitud));
             }
             return res;
+        }
+
+        public bool CargarGrafo()
+        {
+            try
+            {
+                Vertices = VerticeDB.ConsultarVertices();
+                CompletarGrafo();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                return false;
+            }
         }
     }
 }
