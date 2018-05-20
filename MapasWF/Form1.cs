@@ -13,6 +13,7 @@ using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using Grafo;
+using Grafo.Utils;
 
 namespace MapasWF
 {
@@ -33,28 +34,26 @@ namespace MapasWF
             manager = new MapFormManager(Map1);
             Map1.OnMapDrag += Map1_OnMapDrag;
             Map1.OnMarkerClick += Map1_OnMarkerClick;
-            List<Coordenada> temp = new List<Coordenada>();
-            temp.Add(new Coordenada(-17.783, -63.184));
-            temp.Add(new Coordenada(-17.786, -63.192));
-            temp.Add(new Coordenada(-17.777, -63.197));
-            temp.Add(new Coordenada(-17.768, -63.176));
-            manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(temp));
+           
 
 
             // Grafo
             _thread = new Thread(() => CargarDatos());
             _thread.Start();
+            Actualizar();
         }
         private async void Actualizar()
         {
             while (Datos == null)
             {
-                _thread.Abort();
+               
 
                 // QUE HACER CUANDO SE TIENEN LOS DATOS;
-
                 await Task.Delay(250);
             }
+            _thread.Abort();
+            manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(Datos.Coordenadas()));
+
         }
 
         private void CargarDatos()
