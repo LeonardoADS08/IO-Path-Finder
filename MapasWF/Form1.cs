@@ -34,8 +34,9 @@ namespace MapasWF
             temp.Add(new Coordenada(-17.786, -63.192));
             temp.Add(new Coordenada(-17.777, -63.197));
             temp.Add(new Coordenada(-17.768, -63.176));
-            Map1.Overlays.Add(manager.CoordinateArrayToOverlay(temp));
-            manager.Overlay = Map1.Overlays[0];
+           manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(temp));
+            
+
         }
 
         private void Map1_OnMarkerClick(GMapMarker item, MouseEventArgs e)
