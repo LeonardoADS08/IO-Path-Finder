@@ -8,8 +8,8 @@ namespace Grafo
 {
     public class Coordenada
     {
-        double Latitud;
-        double Longitud;
+        public double Latitud;
+        public double Longitud;
 
         public Coordenada()
         {

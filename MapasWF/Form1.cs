@@ -26,6 +26,12 @@ namespace MapasWF
             InitializeComponent();
             manager = new MapFormManager(Map1);
             Map1.OnMapDrag += Map1_OnMapDrag;
+            Map1.OnMarkerClick += Map1_OnMarkerClick;
+        }
+
+        private void Map1_OnMarkerClick(GMapMarker item, MouseEventArgs e)
+        {
+            item.ToolTipMode = item.ToolTipMode == MarkerTooltipMode.Always ? MarkerTooltipMode.Never : MarkerTooltipMode.Always;
         }
 
         private void Map1_OnMapDrag()
@@ -84,31 +90,7 @@ namespace MapasWF
 
 
         }
-        /// <summary>
-        /// Muesra en el mapa(del form) una collecion de coordenadas como una ruta
-        /// </summary>
-        /// <param name="x"></param>
-        private void ShowMapMarkerCollection(List<Coordenada> x)
-        {
-            if (x.Count <= 1)
-            {
-                MessageBox.Show("No existen sifuciente Nodos para realizar un camino");
-                return;
-            }
-            else
-            {
-                PointLatLng prim, sec ;
-                for (int i = 0; i < x.Count()-1; i++)
-                {
-                    prim = new PointLatLng(x[i].Latitud, x[i].Longitud);
-                    sec = new PointLatLng(x[i+1].Latitud, x[i+1].Longitud);
-                    manager.CrearRutadinamica(prim, sec);
-
-                }
-            }
-
-        }
-
+        
         private void button5_Click(object sender, EventArgs e)
         {
             manager.Fflush(Map1);
