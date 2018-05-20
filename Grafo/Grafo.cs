@@ -91,5 +91,13 @@ namespace Grafo
                 return false;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OrdenarGrafo()
+        {
+
+        }
     }
 }
