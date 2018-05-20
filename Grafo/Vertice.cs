@@ -30,6 +30,14 @@ namespace Grafo
             Longitud = Constantes.LONGITUD_PREDETERMINADA;
         }
 
+        public Vertice(VerticeDB datos)
+        {
+            Aristas = new List<Arista>();
+            Nombre = datos.Nombre;
+            Latitud = datos.Latitud;
+            Longitud = datos.Longitud;
+        }
+
         public Vertice(string nombre, float latitud, float longitud)
         {
             Aristas = new List<Arista>();

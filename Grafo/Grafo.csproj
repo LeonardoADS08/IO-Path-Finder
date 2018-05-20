@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiteDB">
+      <HintPath>..\..\..\..\..\Proyectos Juegos\Logistics\Assets\Fuente\Herramientas\LiteDB.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,8 +48,11 @@
     <Compile Include="Coordenada.cs" />
     <Compile Include="Estados.cs" />
     <Compile Include="Grafo.cs" />
+    <Compile Include="Utils\Logs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\uDB.cs" />
     <Compile Include="Vertice.cs" />
+    <Compile Include="VerticeDB.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
