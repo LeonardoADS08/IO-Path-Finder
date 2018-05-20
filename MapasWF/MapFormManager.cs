@@ -16,6 +16,7 @@ namespace MapasWF
         GMarkerGoogle _marker;
         GMapOverlay _overlay;
         GMapControl _main;
+        public List<double> _temproutes;
 
         public GMarkerGoogle Marker { get => _marker; set => _marker = value; }
         public GMapOverlay Overlay { get => _overlay; set => _overlay = value; }
@@ -90,7 +91,9 @@ namespace MapasWF
             }
 
             GMapRoute Obtenida = new GMapRoute(direcctions.Route, "Ruta");
+            _temproutes.Add(Obtenida.Distance);
             _overlay.Routes.Add(Obtenida);
+            
            // _main.Overlays.Add(_overlay);
             this.Update();
 
@@ -187,6 +190,15 @@ namespace MapasWF
                 }
             }
 
+        }
+
+        public void UpdateDistancesPerMarkers()
+        {
+
+            foreach (GMapMarker x in _main.Overlays[0].Markers)
+            {
+                
+            }
         }
 
 
