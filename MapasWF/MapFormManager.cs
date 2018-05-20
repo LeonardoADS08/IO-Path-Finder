@@ -130,7 +130,7 @@ namespace MapasWF
            
         }
 
-        private GMapOverlay CoordinateArrayToOverlay(List<Coordenada> x)
+        public GMapOverlay CoordinateArrayToOverlay(List<Coordenada> x)
         {
             GMarkerGoogle current = null;
             GMapOverlay aux= new GMapOverlay("Marcadores");

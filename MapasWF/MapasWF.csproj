@@ -53,6 +53,9 @@
     <Reference Include="GMap.NET.WindowsPresentation, Version=1.8.5.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
       <HintPath>..\packages\GMap.NET.Windows.1.8.5\lib\net40\GMap.NET.WindowsPresentation.dll</HintPath>
     </Reference>
+    <Reference Include="LiteDB">
+      <HintPath>..\LiteDB.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -120,6 +123,14 @@
     <ProjectReference Include="..\Grafo\Grafo.csproj">
       <Project>{787db607-9372-4b41-b4a4-a5e78479a3cb}</Project>
       <Name>Grafo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IO Path Finder\IO Path Finder.csproj">
+      <Project>{468c3b5b-5c7d-4b6e-94ff-fb7352041976}</Project>
+      <Name>IO Path Finder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Maps\Maps.csproj">
+      <Project>{eb8a0c2f-2f06-490a-8edf-a110507b46f9}</Project>
+      <Name>Maps</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

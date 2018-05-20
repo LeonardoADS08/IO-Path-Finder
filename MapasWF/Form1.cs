@@ -11,6 +11,8 @@ using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
+using Grafo;
+
 namespace MapasWF
 {
     public partial class Form1 : Form
@@ -27,6 +29,13 @@ namespace MapasWF
             manager = new MapFormManager(Map1);
             Map1.OnMapDrag += Map1_OnMapDrag;
             Map1.OnMarkerClick += Map1_OnMarkerClick;
+            List<Coordenada> temp = new List<Coordenada>();
+            temp.Add(new Coordenada(-17.783, -63.184));
+            temp.Add(new Coordenada(-17.786, -63.192));
+            temp.Add(new Coordenada(-17.777, -63.197));
+            temp.Add(new Coordenada(-17.768, -63.176));
+            Map1.Overlays.Add(manager.CoordinateArrayToOverlay(temp));
+            manager.Overlay = Map1.Overlays[0];
         }
 
         private void Map1_OnMarkerClick(GMapMarker item, MouseEventArgs e)

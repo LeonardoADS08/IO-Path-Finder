@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LiteDB">
-      <HintPath>..\..\..\..\..\Proyectos Juegos\Logistics\Assets\Fuente\Herramientas\LiteDB.dll</HintPath>
+      <HintPath>..\LiteDB.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
