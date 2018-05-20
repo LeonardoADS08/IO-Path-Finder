@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IO Path Finder", "IO Path Finder\IO Path Finder.csproj", "{468C3B5B-5C7D-4B6E-94FF-FB7352041976}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maps", "Maps\Maps.csproj", "{EB8A0C2F-2F06-490A-8EDF-A110507B46F9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grafo", "Grafo\Grafo.csproj", "{787DB607-9372-4B41-B4A4-A5E78479A3CB}"
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{468C3B5B-5C7D-4B6E-94FF-FB7352041976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{468C3B5B-5C7D-4B6E-94FF-FB7352041976}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{468C3B5B-5C7D-4B6E-94FF-FB7352041976}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{468C3B5B-5C7D-4B6E-94FF-FB7352041976}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB8A0C2F-2F06-490A-8EDF-A110507B46F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EB8A0C2F-2F06-490A-8EDF-A110507B46F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB8A0C2F-2F06-490A-8EDF-A110507B46F9}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -11,10 +11,15 @@ namespace Maps
 {
     public class Utils
     {
-
+        public static bool Cargado = false;
         static Utils()
         {
-            GoogleSigned.AssignAllServices(new GoogleSigned("AIzaSyCtcn_dJ3F-DfVCKyaO1-lTBIkoIbyZZYo"));
+            // GoogleSigned.AssignAllServices(new GoogleSigned("AIzaSyCtcn_dJ3F-DfVCKyaO1-lTBIkoIbyZZYo"));
+            GoogleSigned.AssignAllServices(new GoogleSigned("AIzaSyCcGVtsZ0A0QHv8Kq04Uh6fCke2ajKLbvQ"));
+              //GoogleSigned.AssignAllServices(new GoogleSigned("AIzaSyDG4k1RT9mdKFtSlUC5D0K04_IXCtyb2po"));
+            
+
+            Cargado = true;
         }
 
         public static void GeolocalizarGrafo(Grafo.Grafo G)
@@ -43,7 +48,7 @@ namespace Maps
 
         public static void Calcular(Grafo.Vertice V)
         {
-            GoogleSigned.AssignAllServices(new GoogleSigned("AIzaSyCcGVtsZ0A0QHv8Kq04Uh6fCke2ajKLbvQ"));
+            
             foreach (var val in V.Aristas)
             {
                 Google.Maps.DistanceMatrix.DistanceMatrixRequest distanceRequest = new Google.Maps.DistanceMatrix.DistanceMatrixRequest()
@@ -68,11 +73,15 @@ namespace Maps
             }
         }
 
-        public Grafo.Grafo SolicitarDatos()
+        public static Grafo.Grafo SolicitarDatos()
         {
             Grafo.Grafo res = new Grafo.Grafo();
             res.CargarGrafo();
             GeolocalizarGrafo(res);
+            foreach(var val in res.Vertices)
+            {
+                Calcular(val);
+            }
             return res;
         }
     }
