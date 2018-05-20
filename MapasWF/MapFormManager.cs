@@ -91,8 +91,9 @@ namespace MapasWF
             }
 
             GMapRoute Obtenida = new GMapRoute(direcctions.Route, "Ruta");
-            _temproutes.Add(Obtenida.Distance);
-            _overlay.Routes.Add(Obtenida);
+            double aux = Obtenida.Distance;
+            //_temproutes.Add(aux);
+            //_overlay.Routes.Add(Obtenida);
             
            // _main.Overlays.Add(_overlay);
             this.Update();
@@ -112,7 +113,7 @@ namespace MapasWF
 
             }
             CrearRutadinamica(new PointLatLng(_overlay.Markers[_overlay.Markers.Count()-1].Position.Lat, _overlay.Markers[_overlay.Markers.Count() - 1].Position.Lng), new PointLatLng(_overlay.Markers[0].Position.Lat, _overlay.Markers[0].Position.Lng));
-
+           // UpdateDistancesPerMarkers();
         }
         /// <summary>
         /// Reinicio completo del mapa(se pierde todo)
@@ -194,10 +195,13 @@ namespace MapasWF
 
         public void UpdateDistancesPerMarkers()
         {
-
+            int i = 0;
             foreach (GMapMarker x in _main.Overlays[0].Markers)
             {
-                
+                if (i != 0)
+                {
+                    x.ToolTipText += "\n Distance" + _temproutes[i - 1].ToString();
+                }
             }
         }
 
