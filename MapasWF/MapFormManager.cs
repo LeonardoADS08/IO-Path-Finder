@@ -29,7 +29,7 @@ namespace MapasWF
         {
             _main = x;
             _marker = null;
-         
+            _temproutes = new List<double>();
                 _overlay = new GMapOverlay("Markadores");
          
 
@@ -81,7 +81,7 @@ namespace MapasWF
         public void CrearRutadinamica(PointLatLng A, PointLatLng B)
         {
             GDirections direcctions = new GDirections();
-            DirectionsStatusCode RutasPosibles = GMapProviders.GoogleMap.GetDirections(out direcctions,A, B, false, false, false, false, false);
+            DirectionsStatusCode RutasPosibles = GMapProviders.GoogleMap.GetDirections(out direcctions,A, B, false, false, false, false, true);
 
             //para cuendo no exista alguna ruta existente
             if (RutasPosibles==GMap.NET.DirectionsStatusCode.ZERO_RESULTS)
@@ -92,8 +92,8 @@ namespace MapasWF
 
             GMapRoute Obtenida = new GMapRoute(direcctions.Route, "Ruta");
             double aux = Obtenida.Distance;
-            //_temproutes.Add(aux);
-            //_overlay.Routes.Add(Obtenida);
+            _temproutes.Add(aux);
+           _overlay.Routes.Add(Obtenida);
             
            // _main.Overlays.Add(_overlay);
             this.Update();
@@ -153,7 +153,7 @@ namespace MapasWF
                 }
                 else
                 {
-                    current = new GMarkerGoogle(new PointLatLng(u.Latitud, u.Longitud), GMarkerGoogleType.red_big_stop);
+                    current = new GMarkerGoogle(new PointLatLng(u.Latitud, u.Longitud), GMarkerGoogleType.red_dot);
                 }
 
                 i++;
