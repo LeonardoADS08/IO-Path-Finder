@@ -28,7 +28,10 @@ namespace MapasWF
         {
             _main = x;
             _marker = null;
-            _overlay = new GMapOverlay("Markadores");
+         
+                _overlay = new GMapOverlay("Markadores");
+         
+
         }
         /// <summary>
         /// marca la posicion (siempre sera verde)
@@ -88,7 +91,7 @@ namespace MapasWF
 
             GMapRoute Obtenida = new GMapRoute(direcctions.Route, "Ruta");
             _overlay.Routes.Add(Obtenida);
-            _main.Overlays.Add(_overlay);
+           // _main.Overlays.Add(_overlay);
             this.Update();
 
         }
@@ -97,13 +100,16 @@ namespace MapasWF
         /// </summary>
         public void GenerarRutaExistencial()
         {
-            
+            _overlay = Main.Overlays[0];
             for (int i = 0; i < _overlay.Markers.Count() - 1; i++)
             {
+                
 
-             CrearRutadinamica(new PointLatLng(_overlay.Markers[i].Position.Lat, _overlay.Markers[i].Position.Lng), new PointLatLng(_overlay.Markers[i + 1].Position.Lat, _overlay.Markers[i + 1].Position.Lng));
+                CrearRutadinamica(new PointLatLng(_overlay.Markers[i].Position.Lat, _overlay.Markers[i].Position.Lng), new PointLatLng(_overlay.Markers[i + 1].Position.Lat, _overlay.Markers[i + 1].Position.Lng));
 
             }
+            CrearRutadinamica(new PointLatLng(_overlay.Markers[_overlay.Markers.Count()-1].Position.Lat, _overlay.Markers[_overlay.Markers.Count() - 1].Position.Lng), new PointLatLng(_overlay.Markers[0].Position.Lat, _overlay.Markers[0].Position.Lng));
+
         }
         /// <summary>
         /// Reinicio completo del mapa(se pierde todo)
@@ -134,13 +140,26 @@ namespace MapasWF
         {
             GMarkerGoogle current = null;
             GMapOverlay aux= new GMapOverlay("Marcadores");
+            int i = 0;
             foreach (Coordenada u in x)
             {
+                if (i == 0)
+                {
+                    current = new GMarkerGoogle(new PointLatLng(u.Latitud, u.Longitud), GMarkerGoogleType.green_dot);
+                }
+                else
+                {
+                    current = new GMarkerGoogle(new PointLatLng(u.Latitud, u.Longitud), GMarkerGoogleType.red_big_stop);
+                }
+
+                i++;
                 
-                current = new GMarkerGoogle(new PointLatLng(u.Latitud, u.Longitud),GMarkerGoogleType.blue_pushpin);
                 current.ToolTipText= "Lat="+ Math.Round(u.Latitud, 4)+"\n Long"+ Math.Round(u.Longitud, 4);
+               
+
                 aux.Markers.Add(current);
             }
+          
 
             return aux;
         }
