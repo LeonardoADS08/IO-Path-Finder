@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GMap.NET;
@@ -23,6 +24,9 @@ namespace MapasWF
         PointLatLng final;
 
         MapFormManager manager;
+
+        Grafo.Grafo Datos;
+        Thread _thread;
         public Form1()
         {
             InitializeComponent();
@@ -34,9 +38,29 @@ namespace MapasWF
             temp.Add(new Coordenada(-17.786, -63.192));
             temp.Add(new Coordenada(-17.777, -63.197));
             temp.Add(new Coordenada(-17.768, -63.176));
-           manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(temp));
-            
+            manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(temp));
 
+
+            // Grafo
+            _thread = new Thread(() => CargarDatos());
+            _thread.Start();
+        }
+        private async void Actualizar()
+        {
+            while (Datos == null)
+            {
+                _thread.Abort();
+
+                // QUE HACER CUANDO SE TIENEN LOS DATOS;
+
+                await Task.Delay(250);
+            }
+        }
+
+        private void CargarDatos()
+        {
+            Grafo.Utils.Datos.VerificarDatos();
+            Datos = Maps.Utils.SolicitarDatos();
         }
 
         private void Map1_OnMarkerClick(GMapMarker item, MouseEventArgs e)
