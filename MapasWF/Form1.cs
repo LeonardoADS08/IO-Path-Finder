@@ -94,8 +94,11 @@ namespace MapasWF
             //Map1.Overlays.Add(_overlay);
             //Map1.Position = _marker.Position;
            // Datos.Insertar(Tdireccionbusqueda.Text);
-            Map1.SetPositionByKeywords("universidad nur,bolivia");
-          
+            Map1.SetPositionByKeywords(Tdireccionbusqueda.Text);
+            Map1.Overlays[0].Markers.Add(new GMarkerGoogle(new PointLatLng(Map1.Position.Lat, Map1.Position.Lng),
+                GMarkerGoogleType.red_dot));
+            Map1.Update();
+
 
 
         }
