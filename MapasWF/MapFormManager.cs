@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,9 @@ namespace MapasWF
         GMarkerGoogle _marker;
         GMapOverlay _overlay;
         GMapControl _main;
+        //overlays
+        //0->marcadores
+        //1->caminos
         public List<double> _temproutes;
 
         public GMarkerGoogle Marker { get => _marker; set => _marker = value; }
@@ -91,12 +95,15 @@ namespace MapasWF
             }
 
             GMapRoute Obtenida = new GMapRoute(direcctions.Route, "Ruta");
+            Obtenida.IsHitTestVisible = true;
+            Obtenida.Stroke = new Pen(Color.CadetBlue, 3);
             double aux = Obtenida.Distance;
             _temproutes.Add(aux);
-           _overlay.Routes.Add(Obtenida);
+
+           _main.Overlays[1].Routes.Add(Obtenida);
             
            // _main.Overlays.Add(_overlay);
-            this.Update();
+          
 
         }
         /// <summary>
@@ -113,31 +120,48 @@ namespace MapasWF
 
             }
             CrearRutadinamica(new PointLatLng(_overlay.Markers[_overlay.Markers.Count()-1].Position.Lat, _overlay.Markers[_overlay.Markers.Count() - 1].Position.Lng), new PointLatLng(_overlay.Markers[0].Position.Lat, _overlay.Markers[0].Position.Lng));
-           // UpdateDistancesPerMarkers();
+          
+            this.Update();
         }
+
         /// <summary>
         /// Reinicio completo del mapa(se pierde todo)
         /// </summary>
-        public void Fflush(GMapControl x)
+        public void Fflush(GMapControl x, string c)
         {
-            DialogResult dialogResult = MessageBox.Show("Esta accion es terminal", "Advertencia", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            switch (c)
             {
-                while (_main.Overlays.Count != 0)
-                {
-                    _main.Overlays.RemoveAt(0);
-                    _overlay = new GMapOverlay("Marcadores");
-                    this.Update();
+                case "Todo":
+                                        {
+                        DialogResult dialogResult = MessageBox.Show("Esta accion es terminal", "Advertencia",
+                            MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            while (_main.Overlays.Count != 0)
+                            {
+                                _main.Overlays.RemoveAt(0);
+                                _overlay = new GMapOverlay("Marcadores");
+                                this.Update();
+                            }
+                        }
+                        else if (dialogResult == DialogResult.No)
+                        {
+                            //do nothing
+                            return;
+                        }
+                        break;
+                    }
+                case
+                    "Solo caminos":
+
+                    {
+                        _main.Overlays[1] = new GMapOverlay("Rutas");
+                        break;
                 }
             }
-            else if (dialogResult == DialogResult.No)
-            {
-                //do nothing
-                return;
-            }
 
 
-           
+
         }
 
         public GMapOverlay CoordinateArrayToOverlay(List<Coordenada> x)
@@ -193,17 +217,7 @@ namespace MapasWF
 
         }
 
-        public void UpdateDistancesPerMarkers()
-        {
-            int i = 0;
-            foreach (GMapMarker x in _main.Overlays[0].Markers)
-            {
-                if (i != 0)
-                {
-                    x.ToolTipText += "\n Distance" + _temproutes[i - 1].ToString();
-                }
-            }
-        }
+    
 
 
 
