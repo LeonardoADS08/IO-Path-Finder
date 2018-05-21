@@ -95,8 +95,10 @@ namespace MapasWF
             //Map1.Position = _marker.Position;
            // Datos.Insertar(Tdireccionbusqueda.Text);
             Map1.SetPositionByKeywords(Tdireccionbusqueda.Text);
-            Map1.Overlays[0].Markers.Add(new GMarkerGoogle(new PointLatLng(Map1.Position.Lat, Map1.Position.Lng),
-                GMarkerGoogleType.red_dot));
+            GMarkerGoogle aux = new GMarkerGoogle(new PointLatLng(Map1.Position.Lat, Map1.Position.Lng),
+                GMarkerGoogleType.red_dot);
+            aux.ToolTipText = "Index =" + (Map1.Overlays[0].Markers.Count+1) + "\n" + "Lat = " + Math.Round(aux.Position.Lat, 5) + "\n Long = " + Math.Round(aux.Position.Lng, 5);
+            Map1.Overlays[0].Markers.Add(aux);
             Map1.Update();
 
 

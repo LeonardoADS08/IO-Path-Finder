@@ -78,6 +78,7 @@
             // 
             // Tlatitud
             // 
+            this.Tlatitud.Enabled = false;
             this.Tlatitud.Location = new System.Drawing.Point(36, 54);
             this.Tlatitud.Name = "Tlatitud";
             this.Tlatitud.Size = new System.Drawing.Size(100, 20);
@@ -85,6 +86,7 @@
             // 
             // Tlongitud
             // 
+            this.Tlongitud.Enabled = false;
             this.Tlongitud.Location = new System.Drawing.Point(142, 54);
             this.Tlongitud.Name = "Tlongitud";
             this.Tlongitud.Size = new System.Drawing.Size(100, 20);

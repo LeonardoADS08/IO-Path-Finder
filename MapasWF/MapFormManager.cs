@@ -17,6 +17,7 @@ namespace MapasWF
         GMarkerGoogle _marker;
         GMapOverlay _overlay;
         GMapControl _main;
+        Random rnd = new Random();
         //overlays
         //0->marcadores
         //1->caminos
@@ -96,7 +97,8 @@ namespace MapasWF
 
             GMapRoute Obtenida = new GMapRoute(direcctions.Route, "Ruta");
             Obtenida.IsHitTestVisible = true;
-            Obtenida.Stroke = new Pen(Color.CadetBlue, 3);
+           
+            Obtenida.Stroke = new Pen(Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256)), 3);
             double aux = Obtenida.Distance;
             _temproutes.Add(aux);
 
@@ -140,9 +142,11 @@ namespace MapasWF
                             while (_main.Overlays.Count != 0)
                             {
                                 _main.Overlays.RemoveAt(0);
-                                _overlay = new GMapOverlay("Marcadores");
-                                this.Update();
+                               
                             }
+                            Main.Overlays.Add(new GMapOverlay("Marcadores"));
+                            _overlay = Main.Overlays[0];
+                            this.Update();
                         }
                         else if (dialogResult == DialogResult.No)
                         {
@@ -182,7 +186,7 @@ namespace MapasWF
 
                 i++;
                 
-                current.ToolTipText= "Lat="+ Math.Round(u.Latitud, 4)+"\n Long"+ Math.Round(u.Longitud, 4);
+                current.ToolTipText= "Index ="+i+"\n"+"Lat = "+ Math.Round(u.Latitud, 4)+"\n Long = "+ Math.Round(u.Longitud, 5);
                
 
                 aux.Markers.Add(current);
