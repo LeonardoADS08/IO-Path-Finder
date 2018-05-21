@@ -35,6 +35,7 @@ namespace MapasWF
             Map1.OnMapDrag += Map1_OnMapDrag;
             Map1.OnMarkerClick += Map1_OnMarkerClick;
             Map1.OnRouteClick += Map1_OnRouteClick;
+            Map1.OnMarkerDoubleClick += Map1_OnMarkerDoubleClick;
 
             ComboFflush.SelectedIndex = 0;
            
@@ -44,6 +45,12 @@ namespace MapasWF
             _thread = new Thread(() => CargarDatos());
             _thread.Start();
             Actualizar();
+           
+        }
+
+        private void Map1_OnMarkerDoubleClick(GMapMarker item, MouseEventArgs e)
+        {
+            MessageBox.Show(manager.isMarked(item).ToString());
         }
 
         private void Map1_OnRouteClick(GMapRoute item, MouseEventArgs e)
@@ -65,6 +72,7 @@ namespace MapasWF
             _thread.Abort();
             manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(Datos.Coordenadas()));
             manager.Update();
+            manager.mark(manager.Main.Overlays[0].Markers[3]);
 
         }
 
@@ -97,7 +105,7 @@ namespace MapasWF
             Map1.SetPositionByKeywords(Tdireccionbusqueda.Text);
             GMarkerGoogle aux = new GMarkerGoogle(new PointLatLng(Map1.Position.Lat, Map1.Position.Lng),
                 GMarkerGoogleType.red_dot);
-            aux.ToolTipText = "Index =" + (Map1.Overlays[0].Markers.Count+1) + "\n" + "Lat = " + Math.Round(aux.Position.Lat, 5) + "\n Long = " + Math.Round(aux.Position.Lng, 5);
+            aux.ToolTipText = "Index =" + (Map1.Overlays[0].Markers.Count) + "\n" + "Lat = " + Math.Round(aux.Position.Lat, 5) + "\n Long = " + Math.Round(aux.Position.Lng, 5);
             Map1.Overlays[0].Markers.Add(aux);
             Map1.Update();
 
@@ -146,6 +154,11 @@ namespace MapasWF
             aux.ToolTipText = "Index =" + (Map1.Overlays[0].Markers.Count + 1) + "\n" + "Lat = " + Math.Round(aux.Position.Lat, 5) + "\n Long = " + Math.Round(aux.Position.Lng, 5);
             Map1.Overlays[0].Markers.Add(aux);
             Map1.Update();
+        }
+
+        private void Bbruteforce_Click(object sender, EventArgs e)
+        {
+            manager.BruteForce();
         }
     }
 }

@@ -41,8 +41,15 @@
             this.Baddposittion = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Bbruteforce = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.Ttempototal = new System.Windows.Forms.TextBox();
+            this.Tdistanciatotal = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // Map1
@@ -166,12 +173,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.Bbruteforce);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.ComboFflush);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Location = new System.Drawing.Point(12, 238);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(258, 127);
+            this.groupBox1.Size = new System.Drawing.Size(258, 196);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Eventos";
@@ -188,11 +196,71 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Entrada";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.Ttempototal);
+            this.groupBox3.Controls.Add(this.Tdistanciatotal);
+            this.groupBox3.Location = new System.Drawing.Point(12, 440);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(258, 75);
+            this.groupBox3.TabIndex = 16;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "groupBox3";
+            // 
+            // Bbruteforce
+            // 
+            this.Bbruteforce.Location = new System.Drawing.Point(21, 124);
+            this.Bbruteforce.Name = "Bbruteforce";
+            this.Bbruteforce.Size = new System.Drawing.Size(100, 46);
+            this.Bbruteforce.TabIndex = 13;
+            this.Bbruteforce.Text = "FB";
+            this.Bbruteforce.UseVisualStyleBackColor = true;
+            this.Bbruteforce.Click += new System.EventHandler(this.Bbruteforce_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(131, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(87, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Tiempo estimado";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(25, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(78, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Distancia Total";
+            // 
+            // Ttempototal
+            // 
+            this.Ttempototal.Enabled = false;
+            this.Ttempototal.Location = new System.Drawing.Point(134, 35);
+            this.Ttempototal.Name = "Ttempototal";
+            this.Ttempototal.Size = new System.Drawing.Size(100, 20);
+            this.Ttempototal.TabIndex = 7;
+            this.Ttempototal.Text = "0";
+            // 
+            // Tdistanciatotal
+            // 
+            this.Tdistanciatotal.Enabled = false;
+            this.Tdistanciatotal.Location = new System.Drawing.Point(28, 35);
+            this.Tdistanciatotal.Name = "Tdistanciatotal";
+            this.Tdistanciatotal.Size = new System.Drawing.Size(100, 20);
+            this.Tdistanciatotal.TabIndex = 6;
+            this.Tdistanciatotal.Text = "0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1052, 537);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
@@ -206,6 +274,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -226,6 +296,12 @@
         private System.Windows.Forms.Button Baddposittion;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button Bbruteforce;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox Ttempototal;
+        private System.Windows.Forms.TextBox Tdistanciatotal;
     }
 }
 
