@@ -38,6 +38,11 @@
             this.button5 = new System.Windows.Forms.Button();
             this.Tdireccionbusqueda = new System.Windows.Forms.TextBox();
             this.ComboFflush = new System.Windows.Forms.ComboBox();
+            this.Baddposittion = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // Map1
@@ -48,7 +53,7 @@
             this.Map1.GrayScaleMode = false;
             this.Map1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.Map1.LevelsKeepInMemmory = 5;
-            this.Map1.Location = new System.Drawing.Point(248, 12);
+            this.Map1.Location = new System.Drawing.Point(294, 12);
             this.Map1.MarkersEnabled = true;
             this.Map1.MaxZoom = 2;
             this.Map1.MinZoom = 2;
@@ -62,13 +67,13 @@
             this.Map1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.Map1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.Map1.ShowTileGridLines = false;
-            this.Map1.Size = new System.Drawing.Size(792, 503);
+            this.Map1.Size = new System.Drawing.Size(746, 503);
             this.Map1.TabIndex = 0;
             this.Map1.Zoom = 0D;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(36, 116);
+            this.button1.Location = new System.Drawing.Point(21, 45);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 46);
             this.button1.TabIndex = 1;
@@ -112,7 +117,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(36, 168);
+            this.button4.Location = new System.Drawing.Point(21, 19);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(100, 46);
             this.button4.TabIndex = 8;
@@ -122,17 +127,17 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(12, 405);
+            this.button5.Location = new System.Drawing.Point(21, 71);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(100, 46);
             this.button5.TabIndex = 9;
-            this.button5.Text = "Flush";
+            this.button5.Text = "Limpiar mapa";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Tdireccionbusqueda
             // 
-            this.Tdireccionbusqueda.Location = new System.Drawing.Point(36, 90);
+            this.Tdireccionbusqueda.Location = new System.Drawing.Point(21, 19);
             this.Tdireccionbusqueda.Name = "Tdireccionbusqueda";
             this.Tdireccionbusqueda.Size = new System.Drawing.Size(206, 20);
             this.Tdireccionbusqueda.TabIndex = 11;
@@ -144,29 +149,63 @@
             this.ComboFflush.Items.AddRange(new object[] {
             "Solo caminos",
             "Todo"});
-            this.ComboFflush.Location = new System.Drawing.Point(118, 419);
+            this.ComboFflush.Location = new System.Drawing.Point(127, 85);
             this.ComboFflush.Name = "ComboFflush";
             this.ComboFflush.Size = new System.Drawing.Size(121, 21);
             this.ComboFflush.TabIndex = 12;
+            // 
+            // Baddposittion
+            // 
+            this.Baddposittion.Location = new System.Drawing.Point(21, 97);
+            this.Baddposittion.Name = "Baddposittion";
+            this.Baddposittion.Size = new System.Drawing.Size(100, 46);
+            this.Baddposittion.TabIndex = 13;
+            this.Baddposittion.Text = "Añadir posicion ";
+            this.Baddposittion.UseVisualStyleBackColor = true;
+            this.Baddposittion.Click += new System.EventHandler(this.Baddposittion_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button5);
+            this.groupBox1.Controls.Add(this.ComboFflush);
+            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Location = new System.Drawing.Point(12, 238);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(258, 127);
+            this.groupBox1.TabIndex = 14;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Eventos";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.Baddposittion);
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.Tdireccionbusqueda);
+            this.groupBox2.Location = new System.Drawing.Point(12, 80);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(258, 152);
+            this.groupBox2.TabIndex = 15;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Entrada";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1052, 537);
-            this.Controls.Add(this.ComboFflush);
-            this.Controls.Add(this.Tdireccionbusqueda);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Tlongitud);
             this.Controls.Add(this.Tlatitud);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.Map1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,6 +223,9 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TextBox Tdireccionbusqueda;
         private System.Windows.Forms.ComboBox ComboFflush;
+        private System.Windows.Forms.Button Baddposittion;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 

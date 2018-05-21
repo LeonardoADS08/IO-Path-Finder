@@ -139,6 +139,13 @@ namespace MapasWF
             manager.Fflush(Map1,(ComboFflush.Text));
         }
 
-      
+        private void Baddposittion_Click(object sender, EventArgs e)
+        {
+            GMarkerGoogle aux = new GMarkerGoogle(new PointLatLng(Map1.Position.Lat, Map1.Position.Lng),
+                GMarkerGoogleType.red_dot);
+            aux.ToolTipText = "Index =" + (Map1.Overlays[0].Markers.Count + 1) + "\n" + "Lat = " + Math.Round(aux.Position.Lat, 5) + "\n Long = " + Math.Round(aux.Position.Lng, 5);
+            Map1.Overlays[0].Markers.Add(aux);
+            Map1.Update();
+        }
     }
 }
