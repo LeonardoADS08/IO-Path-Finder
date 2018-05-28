@@ -69,11 +69,11 @@ namespace MapasWF
             _thread.Abort();
 
             Grafo.Utils.Datos.VerificarDatos();
-            var test = Datos.TSP();
+            var teesepesango = Datos.TSP();
 
-            manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(Datos.Coordenadas()));
+            manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(teesepesango));
             manager.Update();
-            manager.mark(manager.Main.Overlays[0].Markers[3]);
+           // manager.mark(manager.Main.Overlays[0].Markers[3]);
 
         }
 
