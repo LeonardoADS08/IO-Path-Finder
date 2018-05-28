@@ -188,9 +188,6 @@ namespace MapasWF
                 {
                     current = new GMarkerGoogle(new PointLatLng(u.Latitud, u.Longitud), GMarkerGoogleType.red_dot);
                 }
-
-                
-                
                 current.ToolTipText= "Index ="+i+"\n"+"Lat = "+ Math.Round(u.Latitud, 4)+"\n Long = "+ Math.Round(u.Longitud, 5);
 
                 i++;

@@ -18,10 +18,6 @@ namespace Grafo.Utils
                 datos.Add(new VerticeDB("Estadio Tahuichi Aguilera"));
                 datos.Add(new VerticeDB("Avion Pirata"));
                 datos.Add(new VerticeDB("Plaza 24 de Septiembre"));
-                datos.Add(new VerticeDB("Ventura Mall, Santa Cruz de la Sierra, Bolivia"));
-                datos.Add(new VerticeDB("Universidad Gabriel Rene Moreno, Santa Cruz de la Sierra, Bolivia"));
-                datos.Add(new VerticeDB("Aeropuerto el trompillo"));
-
                 VerticeDB.Eliminar();
                 VerticeDB.Insertar(datos);
             }

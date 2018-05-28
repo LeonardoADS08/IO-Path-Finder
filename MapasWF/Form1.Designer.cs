@@ -40,9 +40,9 @@
             this.ComboFflush = new System.Windows.Forms.ComboBox();
             this.Baddposittion = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Bbruteforce = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.Bbruteforce = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.Ttempototal = new System.Windows.Forms.TextBox();
@@ -184,6 +184,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Eventos";
             // 
+            // Bbruteforce
+            // 
+            this.Bbruteforce.Location = new System.Drawing.Point(21, 124);
+            this.Bbruteforce.Name = "Bbruteforce";
+            this.Bbruteforce.Size = new System.Drawing.Size(100, 46);
+            this.Bbruteforce.TabIndex = 13;
+            this.Bbruteforce.Text = "FB";
+            this.Bbruteforce.UseVisualStyleBackColor = true;
+
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.Baddposittion);
@@ -208,16 +218,6 @@
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "groupBox3";
-            // 
-            // Bbruteforce
-            // 
-            this.Bbruteforce.Location = new System.Drawing.Point(21, 124);
-            this.Bbruteforce.Name = "Bbruteforce";
-            this.Bbruteforce.Size = new System.Drawing.Size(100, 46);
-            this.Bbruteforce.TabIndex = 13;
-            this.Bbruteforce.Text = "FB";
-            this.Bbruteforce.UseVisualStyleBackColor = true;
-            this.Bbruteforce.Click += new System.EventHandler(this.Bbruteforce_Click);
             // 
             // label3
             // 

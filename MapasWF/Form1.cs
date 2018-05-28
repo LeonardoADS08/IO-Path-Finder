@@ -28,6 +28,7 @@ namespace MapasWF
 
         Grafo.Grafo Datos;
         Thread _thread;
+
         public Form1()
         {
             InitializeComponent();
@@ -38,7 +39,7 @@ namespace MapasWF
             Map1.OnMarkerDoubleClick += Map1_OnMarkerDoubleClick;
 
             ComboFflush.SelectedIndex = 0;
-            
+          
             // Grafo
             _thread = new Thread(() => CargarDatos());
             _thread.Start();
@@ -71,9 +72,9 @@ namespace MapasWF
             Grafo.Utils.Datos.VerificarDatos();
             var test = Datos.TSP();
 
-            manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(Datos.Coordenadas()));
+            manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(test));
             manager.Update();
-            manager.mark(manager.Main.Overlays[0].Markers[3]);
+
 
         }
 
@@ -145,7 +146,9 @@ namespace MapasWF
         
         private void button5_Click(object sender, EventArgs e)
         {
-            manager.Fflush(Map1,(ComboFflush.Text));
+    manager.Fflush(Map1,(ComboFflush.Text));
+           
+
         }
 
         private void Baddposittion_Click(object sender, EventArgs e)
@@ -157,9 +160,5 @@ namespace MapasWF
             Map1.Update();
         }
 
-        private void Bbruteforce_Click(object sender, EventArgs e)
-        {
-            manager.BruteForce();
-        }
     }
 }
