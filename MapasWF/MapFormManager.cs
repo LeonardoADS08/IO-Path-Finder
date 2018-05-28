@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,13 @@ namespace MapasWF
         GMarkerGoogle _marker;
         GMapOverlay _overlay;
         GMapControl _main;
+        Random rnd = new Random();
+        //overlays
+        //0->marcadores
+        //1->caminos
         public List<double> _temproutes;
+        public List<GMapMarker> _marcados;
+        public List<GMapMarker> _output;
 
         public GMarkerGoogle Marker { get => _marker; set => _marker = value; }
         public GMapOverlay Overlay { get => _overlay; set => _overlay = value; }
@@ -31,7 +38,9 @@ namespace MapasWF
             _marker = null;
             _temproutes = new List<double>();
                 _overlay = new GMapOverlay("Markadores");
-         
+            _marcados = new List<GMapMarker>();
+            _output = new List<GMapMarker>();
+
 
         }
         /// <summary>
@@ -91,12 +100,16 @@ namespace MapasWF
             }
 
             GMapRoute Obtenida = new GMapRoute(direcctions.Route, "Ruta");
+            Obtenida.IsHitTestVisible = true;
+           
+            Obtenida.Stroke = new Pen(Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256)), 3);
             double aux = Obtenida.Distance;
             _temproutes.Add(aux);
-           _overlay.Routes.Add(Obtenida);
+
+           _main.Overlays[1].Routes.Add(Obtenida);
             
            // _main.Overlays.Add(_overlay);
-            this.Update();
+          
 
         }
         /// <summary>
@@ -113,31 +126,51 @@ namespace MapasWF
 
             }
             CrearRutadinamica(new PointLatLng(_overlay.Markers[_overlay.Markers.Count()-1].Position.Lat, _overlay.Markers[_overlay.Markers.Count() - 1].Position.Lng), new PointLatLng(_overlay.Markers[0].Position.Lat, _overlay.Markers[0].Position.Lng));
-           // UpdateDistancesPerMarkers();
+          
+            this.Update();
         }
+
         /// <summary>
         /// Reinicio completo del mapa(se pierde todo)
         /// </summary>
-        public void Fflush(GMapControl x)
+        public void Fflush(GMapControl x, string c)
         {
-            DialogResult dialogResult = MessageBox.Show("Esta accion es terminal", "Advertencia", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            switch (c)
             {
-                while (_main.Overlays.Count != 0)
-                {
-                    _main.Overlays.RemoveAt(0);
-                    _overlay = new GMapOverlay("Marcadores");
-                    this.Update();
+                case "Todo":
+                                        {
+                        DialogResult dialogResult = MessageBox.Show("Esta accion es terminal", "Advertencia",
+                            MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            while (_main.Overlays.Count != 0)
+                            {
+                                _main.Overlays.RemoveAt(0);
+                               
+                            }
+                            Main.Overlays.Add(new GMapOverlay("Marcadores"));
+                            Main.Overlays.Add(new GMapOverlay("rutas"));
+                            _overlay = Main.Overlays[0];
+                            this.Update();
+                        }
+                        else if (dialogResult == DialogResult.No)
+                        {
+                            //do nothing
+                            return;
+                        }
+                        break;
+                    }
+                case
+                    "Solo caminos":
+
+                    {
+                        _main.Overlays[1] = new GMapOverlay("Rutas");
+                        break;
                 }
             }
-            else if (dialogResult == DialogResult.No)
-            {
-                //do nothing
-                return;
-            }
 
 
-           
+
         }
 
         public GMapOverlay CoordinateArrayToOverlay(List<Coordenada> x)
@@ -156,11 +189,11 @@ namespace MapasWF
                     current = new GMarkerGoogle(new PointLatLng(u.Latitud, u.Longitud), GMarkerGoogleType.red_dot);
                 }
 
-                i++;
                 
-                current.ToolTipText= "Lat="+ Math.Round(u.Latitud, 4)+"\n Long"+ Math.Round(u.Longitud, 4);
-               
+                
+                current.ToolTipText= "Index ="+i+"\n"+"Lat = "+ Math.Round(u.Latitud, 4)+"\n Long = "+ Math.Round(u.Longitud, 5);
 
+                i++;
                 aux.Markers.Add(current);
             }
           
@@ -193,16 +226,129 @@ namespace MapasWF
 
         }
 
-        public void UpdateDistancesPerMarkers()
+        public List<Coordenada> converter(List<GMapMarker> x)
         {
-            int i = 0;
-            foreach (GMapMarker x in _main.Overlays[0].Markers)
+            List<Coordenada> u = new List<Coordenada>();
+            foreach (GMapMarker y in x)
             {
-                if (i != 0)
+                u.Add(new Coordenada(y.Position.Lat, y.Position.Lng));
+            }
+
+            return u;
+        }
+
+        public void mark(GMapMarker A)
+        {
+            _marcados.Add(A);
+        }
+
+        public bool isMarked(GMapMarker A)
+        {
+            foreach (GMapMarker x in _marcados)
+            {
+                if (x.Position.Lat == A.Position.Lat && x.Position.Lng == A.Position.Lng)
                 {
-                    x.ToolTipText += "\n Distance" + _temproutes[i - 1].ToString();
+                    return true;
                 }
             }
+            return false;
+        }
+
+        private GMapMarker bruteforcestep(GMapMarker A, double  output)
+        {
+            GDirections direcctions = new GDirections();
+            GMapMarker final=null;
+            DirectionsStatusCode RutasPosibles;
+            this.mark(A);
+            double current = 100000000;
+            foreach (GMapMarker x in _main.Overlays[0].Markers)
+            {
+
+                if (x!=A&&!this.isMarked(x))
+                {
+                    RutasPosibles= GMapProviders.GoogleMap.GetDirections(out direcctions, A.Position, x.Position, false, false, false, false, true);
+
+                    //para cuendo no exista alguna ruta existente
+                    if (RutasPosibles == DirectionsStatusCode.ZERO_RESULTS)
+                    {
+                        MessageBox.Show("No existe camino posible");
+                        output = 0;
+                        return null;
+                    }
+
+                    GMapRoute Obtenida = new GMapRoute(direcctions.Route, "Ruta");
+                    if (Obtenida.Distance < current)
+                    {
+                        current = Obtenida.Distance;
+                        final = x;
+                    }
+                }
+            }
+            output = current;
+            return final;
+        }
+
+        public void BruteForce()
+        {
+            double temp=0;
+            GMapMarker next = null;
+            
+            next = _main.Overlays[0].Markers[0];
+            do
+            {
+                _output.Add(next);
+                next = bruteforcestep(next, temp);
+            } while (next != null);
+
+            List<Coordenada> temporal=this.converter(_output);
+            this.printfromOverlay(this.CoordinateArrayToOverlay(temporal));
+
+        }
+
+        public double printfromOverlay(GMapOverlay x)
+        {
+            double current = 0;
+
+            GDirections direcctions;
+            GMapRoute Obtenida;
+            DirectionsStatusCode RutasPosibles;
+            for (int i = 0; i < x.Markers.Count-1; i++)
+            {
+                
+           
+                direcctions= new GDirections();
+                RutasPosibles = GMapProviders.GoogleMap.GetDirections(out direcctions, x.Markers[i].Position, x.Markers[i+1].Position, false, false, false, false, true);
+
+               Obtenida  = new GMapRoute(direcctions.Route, "Ruta");
+                Obtenida.IsHitTestVisible = true;
+                Obtenida.Stroke = new Pen(Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256)), 3);
+                double aux = Obtenida.Distance;
+                current += aux;
+                
+                _main.Overlays[1].Routes.Add(Obtenida);
+            }
+              direcctions= new GDirections();
+                RutasPosibles = GMapProviders.GoogleMap.GetDirections(out direcctions, x.Markers[x.Markers.Count-2].Position, x.Markers[x.Markers.Count-1].Position, false, false, false, false, true);
+
+               Obtenida = new GMapRoute(direcctions.Route, "Ruta");
+                Obtenida.IsHitTestVisible = true;
+                Obtenida.Stroke = new Pen(Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256)), 3);
+               current+= Obtenida.Distance;
+                
+
+                _main.Overlays[1].Routes.Add(Obtenida);
+
+
+            _output = new List<GMapMarker>();
+            _marcados = new List<GMapMarker>();
+
+            return current;
+
+          
+
+           
+
+         
         }
 
 

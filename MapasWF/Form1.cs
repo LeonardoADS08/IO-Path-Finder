@@ -34,6 +34,10 @@ namespace MapasWF
             manager = new MapFormManager(Map1);
             Map1.OnMapDrag += Map1_OnMapDrag;
             Map1.OnMarkerClick += Map1_OnMarkerClick;
+            Map1.OnRouteClick += Map1_OnRouteClick;
+            Map1.OnMarkerDoubleClick += Map1_OnMarkerDoubleClick;
+
+            ComboFflush.SelectedIndex = 0;
            
 
 
@@ -41,7 +45,21 @@ namespace MapasWF
             _thread = new Thread(() => CargarDatos());
             _thread.Start();
             Actualizar();
+           
         }
+
+        private void Map1_OnMarkerDoubleClick(GMapMarker item, MouseEventArgs e)
+        {
+            MessageBox.Show(manager.isMarked(item).ToString());
+        }
+
+        private void Map1_OnRouteClick(GMapRoute item, MouseEventArgs e)
+        {
+            MessageBox.Show("Distancia =" + item.Distance.ToString());
+        }
+
+    
+
         private async void Actualizar()
         {
             while (Datos == null)
@@ -53,6 +71,8 @@ namespace MapasWF
             }
             _thread.Abort();
             manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(Datos.Coordenadas()));
+            manager.Update();
+            manager.mark(manager.Main.Overlays[0].Markers[3]);
 
         }
 
@@ -75,12 +95,22 @@ namespace MapasWF
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _marker = new GMarkerGoogle(new PointLatLng(double.Parse(Tlatitud.Text), double.Parse(Tlongitud.Text)), GMarkerGoogleType.green_dot);
-            _marker.ToolTipMode = MarkerTooltipMode.Always;
-            _marker.ToolTipText = string.Format("\n Lat: {0} \n Long:{1}", double.Parse(Tlatitud.Text), double.Parse(Tlongitud.Text));
-            _overlay.Markers.Add(_marker);
-            Map1.Overlays.Add(_overlay);
-            Map1.Position = _marker.Position;
+            //_marker = new GMarkerGoogle(new PointLatLng(double.Parse(Tlatitud.Text), double.Parse(Tlongitud.Text)), GMarkerGoogleType.green_dot);
+            //_marker.ToolTipMode = MarkerTooltipMode.Always;
+            //_marker.ToolTipText = string.Format("\n Lat: {0} \n Long:{1}", double.Parse(Tlatitud.Text), double.Parse(Tlongitud.Text));
+            //_overlay.Markers.Add(_marker);
+            //Map1.Overlays.Add(_overlay);
+            //Map1.Position = _marker.Position;
+           // Datos.Insertar(Tdireccionbusqueda.Text);
+            Map1.SetPositionByKeywords(Tdireccionbusqueda.Text);
+            GMarkerGoogle aux = new GMarkerGoogle(new PointLatLng(Map1.Position.Lat, Map1.Position.Lng),
+                GMarkerGoogleType.red_dot);
+            aux.ToolTipText = "Index =" + (Map1.Overlays[0].Markers.Count) + "\n" + "Lat = " + Math.Round(aux.Position.Lat, 5) + "\n Long = " + Math.Round(aux.Position.Lng, 5);
+            Map1.Overlays[0].Markers.Add(aux);
+            Map1.Update();
+
+
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -88,10 +118,7 @@ namespace MapasWF
             manager.BuildStandart();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            manager.AddMarkernShow(Map1.Position);
-        }
+       
 
         private void Map1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -101,24 +128,15 @@ namespace MapasWF
             Tlongitud.Text = lng.ToString();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            List<PointLatLng> poligono = new List<PointLatLng>();
-            double lng,lat;
-            foreach (GMapMarker x in _overlay.Markers)
-            {
-                poligono.Add(new PointLatLng(x.Position.Lat, x.Position.Lng));
-            }
-            GMapRoute ruta = new GMapRoute(poligono,"Rutas");
-            _overlay.Routes.Add(ruta);
-            Map1.Overlays.Add(_overlay);
-            Map1.Zoom = Map1.Zoom + 1;
-            Map1.Zoom = Map1.Zoom - 1;
-
-        }
+      
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (manager.Main.Overlays.Count == 1)
+            {
+                manager.Main.Overlays.Add(new GMapOverlay());
+            }
+
             manager.GenerarRutaExistencial();
 
 
@@ -126,12 +144,21 @@ namespace MapasWF
         
         private void button5_Click(object sender, EventArgs e)
         {
-            manager.Fflush(Map1);
+            manager.Fflush(Map1,(ComboFflush.Text));
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void Baddposittion_Click(object sender, EventArgs e)
         {
+            GMarkerGoogle aux = new GMarkerGoogle(new PointLatLng(Map1.Position.Lat, Map1.Position.Lng),
+                GMarkerGoogleType.red_dot);
+            aux.ToolTipText = "Index =" + (Map1.Overlays[0].Markers.Count + 1) + "\n" + "Lat = " + Math.Round(aux.Position.Lat, 5) + "\n Long = " + Math.Round(aux.Position.Lng, 5);
+            Map1.Overlays[0].Markers.Add(aux);
+            Map1.Update();
+        }
 
+        private void Bbruteforce_Click(object sender, EventArgs e)
+        {
+            manager.BruteForce();
         }
     }
 }
