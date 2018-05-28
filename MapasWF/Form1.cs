@@ -161,5 +161,17 @@ namespace MapasWF
         {
             manager.BruteForce();
         }
+
+        private void Bbruteforce_Click_1(object sender, EventArgs e)
+        {
+            double aux = 0;
+
+            foreach (GMapRoute x in manager.Main.Overlays[1].Routes)
+            {
+                aux += x.Distance;
+            }
+
+            Tdistanciatotal.Text = aux.ToString();
+        }
     }
 }

@@ -192,7 +192,7 @@
             this.Bbruteforce.TabIndex = 13;
             this.Bbruteforce.Text = "FB";
             this.Bbruteforce.UseVisualStyleBackColor = true;
-
+            this.Bbruteforce.Click += new System.EventHandler(this.Bbruteforce_Click_1);
             // 
             // groupBox2
             // 
