@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Grafo
 {
-    public class Estados : Dictionary<Vertice, bool>
+    public class Estados : Dictionary<string, bool>
     {
-        public Estados(Grafo G) => G.Vertices.ForEach(x => this.Add(x, false));
+        public Estados(Grafo G) => G.Vertices.ForEach(x => this.Add(x.Nombre, false));
     }
 }

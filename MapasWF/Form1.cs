@@ -38,14 +38,11 @@ namespace MapasWF
             Map1.OnMarkerDoubleClick += Map1_OnMarkerDoubleClick;
 
             ComboFflush.SelectedIndex = 0;
-           
-
-
+            
             // Grafo
             _thread = new Thread(() => CargarDatos());
             _thread.Start();
             Actualizar();
-           
         }
 
         private void Map1_OnMarkerDoubleClick(GMapMarker item, MouseEventArgs e)
@@ -70,6 +67,10 @@ namespace MapasWF
                 await Task.Delay(250);
             }
             _thread.Abort();
+
+            Grafo.Utils.Datos.VerificarDatos();
+            var test = Datos.TSP();
+
             manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(Datos.Coordenadas()));
             manager.Update();
             manager.mark(manager.Main.Overlays[0].Markers[3]);

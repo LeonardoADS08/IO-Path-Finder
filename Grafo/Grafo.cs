@@ -54,11 +54,11 @@ namespace Grafo
         private bool ExisteCamino(Vertice A, Vertice B, Estados Estados)
         {
             if (A == B) return true;
-            Estados[A] = true;
+            Estados[A.Nombre] = true;
 
             foreach (var val in A.Aristas)
             {
-                if (!Estados[val.Fin])
+                if (!Estados[val.Fin.Nombre])
                 {
                     if (ExisteCamino(val.Fin, B, Estados)) return true;
                 }
@@ -92,12 +92,61 @@ namespace Grafo
             }
         }
 
+
+        public List<Ruta> Caminos(Vertice Inicio)
+        {
+            List<Ruta> rutas = new List<Ruta>(), resultado = new List<Ruta>();
+            Ruta ruta = new Ruta(); 
+
+            Caminos(Inicio, Inicio, new Estados(this) ,ref rutas, ruta, true);
+            return rutas;
+        }
+
+        private void Caminos(Vertice P, Vertice A, Estados estado, ref List<Ruta> Rutas, Ruta actual, bool Primero = false)
+        {
+            if (!Primero) estado[P.Nombre] = true;
+
+            // Son las mismas ciudades
+            if (!Primero && P.Nombre == A.Nombre)
+            {
+                if (actual.Rutas.Count == Vertices.Count) Rutas.Add(new Ruta(actual));
+                estado[P.Nombre] = false;
+                return;
+            }
+
+            foreach (var x in P.Aristas)
+            {
+                if (!estado[BuscarVertice(x.Fin.Nombre).Nombre])
+                {
+                    actual.Rutas.Add(x);
+                    actual.Distancia += x.Costo;
+                    Caminos(BuscarVertice(x.Fin.Nombre), A, estado, ref Rutas, actual);
+                    actual.Distancia -= x.Costo;
+                    actual.Rutas.RemoveAt(actual.Rutas.Count - 1);
+                }
+            };
+
+            estado[P.Nombre] = false;
+        }
+
         /// <summary>
         /// 
         /// </summary>
         public List<Coordenada> TSP()
         {
-            return new List<Coordenada>();
+            var rutas = Caminos(Vertices[0]);
+            Ruta mejorRuta = new Ruta() { Distancia = double.MaxValue };
+            rutas.ForEach(x =>
+            {
+                if (x.Distancia < mejorRuta.Distancia) mejorRuta = x;
+            });
+            List<Coordenada> res = new List<Coordenada>();
+
+            foreach (var val in mejorRuta.Rutas)
+            {
+                res.Add(new Coordenada(val.Inicio.Latitud, val.Inicio.Longitud));
+            }
+            return res;
         }
     }
 }
