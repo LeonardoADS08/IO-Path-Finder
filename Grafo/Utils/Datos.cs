@@ -22,7 +22,6 @@ namespace Grafo.Utils
                 datos.Add(new VerticeDB("Universidad Gabriel Rene Moreno, Santa Cruz de la Sierra, Bolivia"));
                 datos.Add(new VerticeDB("Aeropuerto el trompillo"));
 
-
                 VerticeDB.Eliminar();
                 VerticeDB.Insertar(datos);
             }

@@ -59,7 +59,7 @@ namespace MapasWF
         private void CargarDatos()
         {
             Grafo.Utils.Datos.VerificarDatos();
-            Datos = Maps.Utils.SolicitarDatos();
+            Datos = Maps.Utils.SolicitarDatos(true);
         }
 
         private void Map1_OnMarkerClick(GMapMarker item, MouseEventArgs e)

@@ -95,9 +95,9 @@ namespace Grafo
         /// <summary>
         /// 
         /// </summary>
-        public void OrdenarGrafo()
+        public List<Coordenada> TSP()
         {
-
+            return new List<Coordenada>();
         }
     }
 }
