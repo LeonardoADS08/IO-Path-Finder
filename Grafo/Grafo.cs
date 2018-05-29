@@ -95,8 +95,7 @@ namespace Grafo
         public Ruta RutaOptima(Vertice Inicio)
         {
             List<Ruta> rutas = new List<Ruta>();
-            Ruta ruta = new Ruta(), mejorRuta = new Ruta();
-
+            Ruta ruta = new Ruta(), mejorRuta = new Ruta() { Distancia = float.MaxValue, Tiempo = float.MaxValue, Rutas = new List<Arista>() };
             Caminos(Inicio, Inicio, new Estados(this), ruta, ref mejorRuta, true);
             return mejorRuta;
         }
@@ -108,7 +107,7 @@ namespace Grafo
             // Son las mismas ciudades
             if (!Primero && P.Nombre == A.Nombre)
             {
-                if (actual.Distancia < mejorRuta.Distancia) mejorRuta = actual;
+                if (actual.Rutas.Count == Vertices.Count && actual.Distancia < mejorRuta.Distancia) mejorRuta = new Ruta(actual);
                 estado[P.Nombre] = false;
                 return;
             }
