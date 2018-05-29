@@ -71,7 +71,7 @@ namespace MapasWF
             Grafo.Utils.Datos.VerificarDatos();
             var teesepesango = Datos.TSP();
 
-            manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(teesepesango));
+            manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(teesepesango.Coordenadas()));
             manager.Update();
            // manager.mark(manager.Main.Overlays[0].Markers[3]);
 
