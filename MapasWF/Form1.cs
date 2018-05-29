@@ -23,7 +23,7 @@ namespace MapasWF
         GMapOverlay _overlay;
         PointLatLng inicio;
         PointLatLng final;
-
+         Ruta teesepesango;
         MapFormManager manager;
 
         Grafo.Grafo Datos;
@@ -36,7 +36,7 @@ namespace MapasWF
             Map1.OnMarkerClick += Map1_OnMarkerClick;
             Map1.OnRouteClick += Map1_OnRouteClick;
             Map1.OnMarkerDoubleClick += Map1_OnMarkerDoubleClick;
-
+            teesepesango = null;
             ComboFflush.SelectedIndex = 0;
             
             // Grafo
@@ -69,7 +69,7 @@ namespace MapasWF
             _thread.Abort();
 
             Grafo.Utils.Datos.VerificarDatos();
-            var teesepesango = Datos.TSP();
+           teesepesango = Datos.TSP();
 
             manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(teesepesango.Coordenadas()));
             manager.Update();
@@ -139,14 +139,9 @@ namespace MapasWF
             }
 
             manager.GenerarRutaExistencial();
-            double aux = 0;
-
-            foreach (GMapRoute x in manager.Main.Overlays[1].Routes)
-            {
-                aux += x.Distance;
-            }
-
-            Tdistanciatotal.Text = aux.ToString();
+            Tdistanciatotal.Text = (teesepesango.Distancia/1000).ToString()+" Km";
+            double van = teesepesango.Tiempo;
+            Ttempototal.Text = Timespliter(van);
 
 
         }
@@ -183,6 +178,14 @@ namespace MapasWF
         private void button3_Click(object sender, EventArgs e)
         {
             manager.ZoomInch(-1);
+        }
+
+        public string Timespliter(double segundos)
+        {
+            TimeSpan aux=TimeSpan.FromSeconds(segundos);
+            String final="H= "+aux.Hours.ToString()+" ,Min= "+aux.Minutes.ToString() + " ,Seg= " + aux.Seconds.ToString();
+
+            return final;
         }
     }
 }

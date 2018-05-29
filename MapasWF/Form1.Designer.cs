@@ -244,7 +244,7 @@
             this.Ttempototal.Enabled = false;
             this.Ttempototal.Location = new System.Drawing.Point(134, 35);
             this.Ttempototal.Name = "Ttempototal";
-            this.Ttempototal.Size = new System.Drawing.Size(100, 20);
+            this.Ttempototal.Size = new System.Drawing.Size(118, 20);
             this.Ttempototal.TabIndex = 7;
             this.Ttempototal.Text = "0";
             // 
