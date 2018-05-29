@@ -173,6 +173,18 @@ namespace MapasWF
 
         }
 
+        public void Centrate()
+        {
+            _main.Position = new PointLatLng(-17.782788, -63.182387);
+            _main.Zoom = 14;
+
+        }
+
+        public void ZoomInch(double x)
+        {
+            _main.Zoom += x;
+        }
+
         public GMapOverlay CoordinateArrayToOverlay(List<Coordenada> x)
         {
             GMarkerGoogle current = null;

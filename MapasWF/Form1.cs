@@ -139,6 +139,14 @@ namespace MapasWF
             }
 
             manager.GenerarRutaExistencial();
+            double aux = 0;
+
+            foreach (GMapRoute x in manager.Main.Overlays[1].Routes)
+            {
+                aux += x.Distance;
+            }
+
+            Tdistanciatotal.Text = aux.ToString();
 
 
         }
@@ -164,14 +172,17 @@ namespace MapasWF
 
         private void Bbruteforce_Click_1(object sender, EventArgs e)
         {
-            double aux = 0;
+            manager.Centrate();
+        }
 
-            foreach (GMapRoute x in manager.Main.Overlays[1].Routes)
-            {
-                aux += x.Distance;
-            }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            manager.ZoomInch(1);
+        }
 
-            Tdistanciatotal.Text = aux.ToString();
+        private void button3_Click(object sender, EventArgs e)
+        {
+            manager.ZoomInch(-1);
         }
     }
 }
