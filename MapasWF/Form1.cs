@@ -25,7 +25,7 @@ namespace MapasWF
         PointLatLng final;
          Ruta teesepesango;
         MapFormManager manager;
-
+        public List<String> DBNAMES;
         Grafo.Grafo Datos;
         Thread _thread;
         public Form1()
@@ -38,7 +38,7 @@ namespace MapasWF
             Map1.OnMarkerDoubleClick += Map1_OnMarkerDoubleClick;
             teesepesango = null;
             ComboFflush.SelectedIndex = 0;
-            
+            DBNAMES = new List<string>();
             // Grafo
             _thread = new Thread(() => CargarDatos());
             _thread.Start();
@@ -73,13 +73,48 @@ namespace MapasWF
 
             manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(teesepesango.Coordenadas()));
             manager.Update();
-           // manager.mark(manager.Main.Overlays[0].Markers[3]);
+            MessageBox.Show("terminado");
+
 
         }
 
+        private async void Actualizar(List<String> x)
+        {
+
+            while (Datos == null)
+            {
+
+
+                // QUE HACER CUANDO SE TIENEN LOS DATOS;
+                await Task.Delay(250);
+            }
+            _thread.Abort();
+
+            Grafo.Utils.Datos.VerificarDatos(x);
+            teesepesango = Datos.TSP();
+
+            manager.Main.Overlays.Add(manager.CoordinateArrayToOverlay(teesepesango.Coordenadas()));
+            manager.Update();
+            MessageBox.Show("terminado");
+
+        
+
+
+        }
+
+
+        /// <summary>
+        /// verifica datos osea nel pastel
+        /// </summary>
         private void CargarDatos()
         {
             Grafo.Utils.Datos.VerificarDatos();
+            Datos = Maps.Utils.SolicitarDatos(true);
+        }
+
+        private void CargarDatos(List<String> x)
+        {
+            Grafo.Utils.Datos.VerificarDatos(x);
             Datos = Maps.Utils.SolicitarDatos(true);
         }
 
@@ -102,13 +137,29 @@ namespace MapasWF
             //_overlay.Markers.Add(_marker);
             //Map1.Overlays.Add(_overlay);
             //Map1.Position = _marker.Position;
-           // Datos.Insertar(Tdireccionbusqueda.Text);
-            Map1.SetPositionByKeywords(Tdireccionbusqueda.Text);
-            GMarkerGoogle aux = new GMarkerGoogle(new PointLatLng(Map1.Position.Lat, Map1.Position.Lng),
-                GMarkerGoogleType.red_dot);
-            aux.ToolTipText = "Index =" + (Map1.Overlays[0].Markers.Count) + "\n" + "Lat = " + Math.Round(aux.Position.Lat, 5) + "\n Long = " + Math.Round(aux.Position.Lng, 5);
-            Map1.Overlays[0].Markers.Add(aux);
-            Map1.Update();
+            // Datos.Insertar(Tdireccionbusqueda.Text);
+            Datos = null;
+            manager.Fflush(Map1, "Restart");
+            if (DBNAMES.Count == 0)
+            {
+                List<String> temp = Grafo.Utils.Datos.standarts();
+
+                temp.Add(Tdireccionbusqueda.Text);
+                DBNAMES = temp;
+                _thread = new Thread(() => CargarDatos(temp));
+                _thread.Start();
+                Actualizar(temp);
+            }
+            else
+            {
+                DBNAMES.Add(Tdireccionbusqueda.Text);
+                _thread = new Thread(() => CargarDatos(DBNAMES));
+                _thread.Start();
+                Actualizar(DBNAMES);
+            }
+
+
+
 
 
 

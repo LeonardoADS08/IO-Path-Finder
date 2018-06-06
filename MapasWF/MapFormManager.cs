@@ -40,7 +40,7 @@ namespace MapasWF
                 _overlay = new GMapOverlay("Markadores");
             _marcados = new List<GMapMarker>();
             _output = new List<GMapMarker>();
-
+      
 
         }
         /// <summary>
@@ -148,7 +148,7 @@ namespace MapasWF
                                 _main.Overlays.RemoveAt(0);
                                
                             }
-                            Main.Overlays.Add(new GMapOverlay("Marcadores"));
+                         Main.Overlays.Add(new GMapOverlay("Marcadores"));
                             Main.Overlays.Add(new GMapOverlay("rutas"));
                             _overlay = Main.Overlays[0];
                             this.Update();
@@ -165,6 +165,16 @@ namespace MapasWF
 
                     {
                         _main.Overlays[1] = new GMapOverlay("Rutas");
+                        break;
+                }
+                case "Restart":
+                {
+                    while (_main.Overlays.Count != 0)
+                    {
+                        _main.Overlays.RemoveAt(0);
+
+                    }
+                    this.Update();
                         break;
                 }
             }

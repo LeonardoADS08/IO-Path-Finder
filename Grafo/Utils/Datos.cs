@@ -17,8 +17,8 @@ namespace Grafo.Utils
                 datos.Add(new VerticeDB("Universidad Privada de Santa Cruz de la Sierra, Bolivia"));
                 datos.Add(new VerticeDB("Estadio Tahuichi Aguilera"));
                 datos.Add(new VerticeDB("Avion Pirata"));
-                //datos.Add(new VerticeDB("Plaza 24 de Septiembre"));
-               // datos.Add(new VerticeDB("Colegio La Salle, Bolivia , Santa Cruz"));
+               // datos.Add(new VerticeDB("Plaza 24 de Septiembre"));
+              //  datos.Add(new VerticeDB("Colegio La Salle, Bolivia , Santa Cruz"));
                 //datos.Add(new VerticeDB("Universidad Franz Tamayo, Bolivia , Santa Cruz"));
                 //datos.Add(new VerticeDB("Mall Las Brisas, Bolivia , Santa Cruz"));
                 //datos.Add(new VerticeDB("Cine center, Bolivia, Santa Cruz"));
@@ -32,6 +32,36 @@ namespace Grafo.Utils
             {
                 Debug.WriteLine(ex.ToString());
             }
+        }
+
+        public static List<String> standarts()
+        {
+            List<String> x = new List<String>();
+            x.Add("Universidad Privada de Santa Cruz de la Sierra, Bolivia");
+            x.Add("Estadio Tahuichi Aguilera");
+            x.Add("Avion Pirata");
+            x.Add("Plaza 24 de Septiembre");
+            x.Add("Colegio La Salle, Bolivia , Santa Cruz");
+            return x;
+        }
+
+        public static void VerificarDatos(List<String> d)
+        {
+            try
+            {
+                List<VerticeDB> datos = new List<VerticeDB>();
+                foreach (String x in d)
+                {
+                    datos.Add(new VerticeDB(x));
+                }
+                VerticeDB.Eliminar();
+                VerticeDB.Insertar(datos);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+
         }
 
     }
