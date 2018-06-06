@@ -40,8 +40,6 @@ namespace Grafo.Utils
             x.Add("Universidad Privada de Santa Cruz de la Sierra, Bolivia");
             x.Add("Estadio Tahuichi Aguilera");
             x.Add("Avion Pirata");
-            x.Add("Plaza 24 de Septiembre");
-            x.Add("Colegio La Salle, Bolivia , Santa Cruz");
             return x;
         }
 
