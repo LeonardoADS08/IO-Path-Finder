@@ -138,13 +138,14 @@ namespace MapasWF
             //Map1.Overlays.Add(_overlay);
             //Map1.Position = _marker.Position;
             // Datos.Insertar(Tdireccionbusqueda.Text);
+            string reginaltext = Tdireccionbusqueda.Text + " , Bolivia , Santa Cruz";
             Datos = null;
             manager.Fflush(Map1, "Restart");
             if (DBNAMES.Count == 0)
             {
                 List<String> temp = Grafo.Utils.Datos.standarts();
 
-                temp.Add(Tdireccionbusqueda.Text);
+                temp.Add(reginaltext);
                 DBNAMES = temp;
                 _thread = new Thread(() => CargarDatos(temp));
                 _thread.Start();
@@ -152,7 +153,7 @@ namespace MapasWF
             }
             else
             {
-                DBNAMES.Add(Tdireccionbusqueda.Text);
+                DBNAMES.Add(reginaltext);
                 _thread = new Thread(() => CargarDatos(DBNAMES));
                 _thread.Start();
                 Actualizar(DBNAMES);

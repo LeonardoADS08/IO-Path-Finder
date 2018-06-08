@@ -171,6 +171,7 @@
             this.Baddposittion.TabIndex = 13;
             this.Baddposittion.Text = "Añadir posicion ";
             this.Baddposittion.UseVisualStyleBackColor = true;
+            this.Baddposittion.Visible = false;
             this.Baddposittion.Click += new System.EventHandler(this.Baddposittion_Click);
             // 
             // groupBox1
